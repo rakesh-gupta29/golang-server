@@ -14,6 +14,8 @@ type Config struct {
 	SMTPServer string `env:"SERVER"`
 	SMTPPort   string `env:"PORT"`
 	Target     string `env:"TARGET"`
+	DB_URL     string `env:"DB_URL"`
+	DB_NAME    string `env:"DB_NAME"`
 }
 
 func LoadConfig() (*Config, error) {

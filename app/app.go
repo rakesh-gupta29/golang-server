@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/rakesh-gupta29/golang-server/config"
+	"github.com/rakesh-gupta29/golang-server/database"
 	"github.com/rakesh-gupta29/golang-server/router"
 )
 
@@ -24,6 +25,13 @@ func MountAndRun() error {
 		WriteTimeout: 30 * time.Second,
 		IdleTimeout:  time.Minute,
 	}
+
+	log.Print("Connecting to Database")
+	err = database.ConnectToMongo()
+	if err != nil {
+		return err
+	}
+	defer database.CloseMongoDBConnection()
 
 	log.Printf("Starting the server on %s", app_config.Address)
 	startError := server.ListenAndServe()
